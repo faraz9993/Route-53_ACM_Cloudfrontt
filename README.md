@@ -1,5 +1,5 @@
 # Route-53_ACM_Cloudfrontt
-### This guide will help you deploy your application on **`EC2 instances`** behind an **`Application Load Balancer (ALB)`**, secured with **`AWS Certificate Manager (ACM)`**, domain managed in **`Route 53`**, and optimized using **`CloudFront CDN`**.
+- This guide will help you deploy your application on **`EC2 instances`** behind an **`Application Load Balancer (ALB)`**, secured with **`AWS Certificate Manager (ACM)`**, domain managed in **`Route 53`**, and optimized using **`CloudFront CDN`**.
 
 
 - [Deploy Application on EC2 instance](#deploy-application-on-ec2-instance)
@@ -125,7 +125,7 @@ Create **`Distribution`**
 - Copy paste the cloud front distrbution domain name in Alias
 - **`Create record`**
 
-## Search **`http://abc.faraz.buzz`** in browser the url will be redirected form http to https and the content wil be served as well.
+- Search **`http://abc.faraz.buzz`** in browser the url will be redirected form http to https and the content wil be served as well.
 
 -------------------
 - Your application will now securely deploy on EC2 behind a Load Balancer, with domain routing via Route 53, SSL from ACM, and global delivery through CloudFront.
