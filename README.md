@@ -1,5 +1,5 @@
 # Route-53_ACM_Cloudfrontt
-- This guide will help you deploy your application on **`EC2 instances`** behind an **`Application Load Balancer (ALB)`**, secured with **`AWS Certificate Manager (ACM)`**, domain managed in **`Route 53`**, and optimized using **`CloudFront CDN`**.
+- This guide will help you to deploy your application on **`EC2 instances`** behind an **`Application Load Balancer (ALB)`**, secured with **`AWS Certificate Manager (ACM)`**, domain managed in **`Route 53`**, and optimized using **`CloudFront CDN`**.
 
 
 - [Deploy Application on EC2 instance](#deploy-application-on-ec2-instance)
@@ -22,7 +22,7 @@
   - `10.1.2.0/24`
   - `10.1.3.0/24`
 - Each subnet in a different **Availability Zone**.
-- Make **2 public** and **1 private**.
+- We will make **2 public** and **1 private** subnet.
 
 
 ### 3. Create and Attach Internet Gateway
@@ -32,7 +32,7 @@
 
 ### 4. Create Route Table
 - Go to **Route Tables → Create Route Table**.
-- Associate it with your VPC.
+- Now, associate it with your VPC.
 - Associate **2 public subnets**.
 - Add Route:
   - Destination: `0.0.0.0/0`
@@ -40,17 +40,17 @@
 
 
 ### 5. Launch 3 EC2 Instances
-- **AMI**: Ubuntu
+- Go to **EC2 → Launch EC2 Instance**.
+- **AMI**: `Ubuntu`
 - **Instance Type**: `t2.micro`
 - **Key Pair**: Create or use existing.
 - **Network Settings**:
   - VPC: Your VPC
   - Subnets: Create each instance in different subnets
   - Security Group: Open inbound `80` and `443` to `0.0.0.0/0`
-- Launch!
+  - Launch!
 
-
-- You can install an nginx server in all three instances and place your index.html at /var/www/html/.
+- You can install an nginx server in all three instances and place your index.html at **`/var/www/html/`** location.
 - To ensure proper functioning of the web-server, you can hit the public IP of intances in browser and get the webpage.
 
 ## Create an Application Load Balancer
@@ -70,8 +70,6 @@ Settings:
 - **VPC**: `Select your VPC`
 - **Subnets**: `Select 3 AZs`
 - **Security Group**: `Open ports 80 and 443.`
-
-### Listeners:
 - **Listener 1**: `HTTP (80)`
 - **Listener 2**: `HTTPS (443)`
 - **Target Group**: `Select created group`
@@ -83,13 +81,13 @@ Settings:
 ## Route 53 Domain Configuration
 1. Create Hosted Zone
 Go to Route 53 → Hosted Zones.
-Click Create Hosted Zone:
+- Click Create Hosted Zone:
 - Domain name: **`faraz.buzz`**
-Copy the NS (Name Servers) provided.
+- Copy the NS (Name Servers) provided.
 
 2. Update Domain Registrar in **`GoDaddy`**.
-Go to GoDaddy → My Account → Domains → DNS.
-Change Name Servers to Route 53 ones.
+- Go to GoDaddy → My Account → Domains → DNS.
+- Change Name Servers to Route 53 ones.
 
 ## Create SSL Certificate with AWS Certificate Manager
 - Go to AWS Certificate Manager in us-east-1.
@@ -98,7 +96,7 @@ Change Name Servers to Route 53 ones.
 - **Type**: `Public`
 - **Validation**: `DNS`
 - **Key Algorithm**: `RSA 2048`
-Click Create Records in Route 53 → Confirm.
+- Click Create Records in Route 53 → Confirm.
 
 ## Cloudfront configuration
 - Go to CloudFront → Create Distribution.
@@ -128,4 +126,4 @@ Create **`Distribution`**
 - Search **`http://abc.faraz.buzz`** in browser the url will be redirected form http to https and the content wil be served as well.
 
 -------------------
-- Your application will now securely deploy on EC2 behind a Load Balancer, with domain routing via Route 53, SSL from ACM, and global delivery through CloudFront.
+- Your application will now securely deploy on EC2 behind an Application Load Balancer, with domain routing via Route 53, SSL from ACM, and global delivery through CloudFront.
