@@ -6,6 +6,7 @@
 - [Create an Application Load Balancer](#create-an-application-load-balancer)
 - [Route 53 Configuration](#route-53-configuration)
 - [Create SSL Certificate with AWS Certificate Manager](#create-ssl-certificate-with-aws-certificate-manager)
+- [Cloudfront configuration](#cloudfront-configuration)
 
 ## Deploy Application on EC2 instance 
 ### 1. Create a VPC
