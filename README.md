@@ -56,24 +56,24 @@
 ### 1. Create Target Group
 - Go to EC2 → Target Groups.
 - Click Create Target Group:
-**Target Type**: `Instances`
-**Protocol**: `HTTP (port 80)`
-**VPC**: Select your VPC
+- **Target Type**: `Instances`
+- **Protocol**: `HTTP (port 80)`
+- **VPC**: Select your VPC
 - Register your 3 EC2 instances.
 
 ### 2. Create ALB
 - Go to EC2 → Load Balancers → Create ALB.
 Settings:
-**Scheme**: `Internet-facing`
-**IP Type**: `IPv4`
-**VPC**: `Select your VPC`
-**Subnets**: `Select 3 AZs`
-**Security Group**: `Open ports 80 and 443.`
+- **Scheme**: `Internet-facing`
+- **IP Type**: `IPv4`
+- **VPC**: `Select your VPC`
+- **Subnets**: `Select 3 AZs`
+- **Security Group**: `Open ports 80 and 443.`
 
 ### Listeners:
-**Listener 1**: `HTTP (80)`
-**Listener 2**: `HTTPS (443)`
-**Target Group**: `Select created group`
+- **Listener 1**: `HTTP (80)`
+- **Listener 2**: `HTTPS (443)`
+- **Target Group**: `Select created group`
 **`Launch the ALB`**
 
 - Only when the HTTP and HTTPs port are set to **`0.0.0.0/0`** in security group, your instances will get healthy.
@@ -83,7 +83,7 @@ Settings:
 1. Create Hosted Zone
 Go to Route 53 → Hosted Zones.
 Click Create Hosted Zone:
-Domain name: **`faraz.buzz`**
+- Domain name: **`faraz.buzz`**
 Copy the NS (Name Servers) provided.
 
 2. Update Domain Registrar in **`GoDaddy`**.
@@ -93,26 +93,26 @@ Change Name Servers to Route 53 ones.
 ## Create SSL Certificate with AWS Certificate Manager
 - Go to AWS Certificate Manager in us-east-1.
 - Click **`Request a certificate`**
-**FQDN**: `*.faraz.buzz`
-**Type**: `Public`
-**Validation**: `DNS`
-**Key Algorithm**: `RSA 2048`
+- **FQDN**: `*.faraz.buzz`
+- **Type**: `Public`
+- **Validation**: `DNS`
+- **Key Algorithm**: `RSA 2048`
 Click Create Records in Route 53 → Confirm.
 
 ## Cloudfront configuration
 - Go to CloudFront → Create Distribution.
 - Settings:
-**Distribution Option**: `Single website or app`
-**Origin**: `Select your ALB`
-**Protocol**: `HTTP only`
-**Viewer protocol policy**: `Redirect HTTP to HTTPS`
-**Allowed HTTP method**: `GET, HEAD, OPTIONS, POST, PATCH, DELETE`
-**Cache key and origin requests**: `Cache policy and origin request policy` 
-**Cache policy**: `Caching disabled`
-**Origin request policy**: `AllViewer`
-**Custom SSL Certificate**: Select the ACM certificate created earlier
+- **Distribution Option**: `Single website or app`
+- **Origin**: `Select your ALB`
+- **Protocol**: `HTTP only`
+- **Viewer protocol policy**: `Redirect HTTP to HTTPS`
+- **Allowed HTTP method**: `GET, HEAD, OPTIONS, POST, PATCH, DELETE`
+- **Cache key and origin requests**: `Cache policy and origin request policy` 
+- **Cache policy**: `Caching disabled`
+- **Origin request policy**: `AllViewer`
+- **Custom SSL Certificate**: Select the ACM certificate created earlier
 Select `TLSv1_2_2021`
-**Alternate DNS name**: `abc.faraz.buzz`
+- **Alternate DNS name**: `abc.faraz.buzz`
 Create **`Distribution`**
 
 ## Now again go to Route 53:
